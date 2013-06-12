@@ -1,0 +1,224 @@
+<div class="kalender gross">
+	<div class="menue">
+		<span class="zeit buttons">
+			<a href="{{dateiname}}?woche_{{datum_zurueck}}" class="vergangenheit">&#9664;</a>
+			<a href="{{dateiname}}?woche" class="heute">Heute</a>
+			<a href="{{dateiname}}?woche_{{datum_vor}}" class="zukunft">&#9654;</a>
+		</span>
+
+		<span class="titel">{{ monat }}</span>
+
+		<span class="intervall">
+			<a class="aktion" href="#">&#9776;</a>
+			<div class="buttons">
+				<span class="pfeil">&#9664;</span>
+				<a href="{{dateiname}}?tag_{{datum_aktuell}}" class="tag">Tag</a>
+				<span class="woche aktiv">Woche</span>
+				<a href="{{dateiname}}?monat_{{datum_aktuell}}" class="monat">Monat</a>
+				<a href="{{dateiname}}?liste" class="liste">Liste</a>
+			</div>
+		</span>
+
+	</div>
+
+	<div class="inhalt">
+		<div class="wochenansicht">
+
+			<div class="kopfzeile clear-fix">
+				{{#tage}}
+					<div class="{{#wochenende}} wochenende {{/wochenende}} {{#sonntag}} sonntag {{/sonntag}}">
+						<span class="datum">{{datum_kurz}}.</span> <span class="tag">{{wochentag_anfang}}<span class="lang">{{wochentag_ende}}</span></span>
+					</div>
+				{{/tage}}
+			</div>
+
+			<div class="ganztagige">
+				{{#tage}}
+					<div class="tag">
+						{{#termine}}
+							{{#ganztagig}}
+								<a class="termin {{#ganztagig}}ganztagig{{/ganztagig}}" data-farbe="{{farbe}}" >
+									<span class="titel">{{ summary }}</span>
+									<div class="details">
+										<!-- <div class="pfeil">&#9664;</div> -->
+										<span class="titel">{{ summary }}</span>
+										<dl class="liste">
+													{{#location}}
+														<dt>Raum:</dt>
+														<dd>{{location}}</dd>
+													{{/location}}
+													
+													<dt>Zeit:</dt>
+													<dd>{{#datum}}{{datum}}{{/datum}}</dd>
+													
+													
+													<!-- <span class="raum">Raum: {{ location }}</span>
+													<span class="zeit">Zeit: {{datum}}, {{ time }}</span> -->
+												</dl>
+										<div class="details">
+											<span class="komplett" >
+												{{{ description_komplett }}}
+											</span>
+										</div>
+									</div>
+								</a>
+							{{/ganztagig}}
+						{{/termine}}
+					</div>
+				{{/tage}}
+			</div>
+
+			<div class="tage">
+				{{#tage}}
+					<div style="height: {{tag_laenge}}px;" class="tag {{#wochenende}} wochenende {{/wochenende}} {{#sonntag}} sonntag {{/sonntag}} {{#heute}} heute {{/heute}}" data-anfang="{{tag_anfang}}">
+						{{#termine}}
+							{{#nicht_ganztagig}}
+
+								<a href="javascript:void(0);" class="termin {{#ganztagig}}ganztagig{{/ganztagig}} clear-fix" style="height: {{duration}}px; top: {{start}}px; width: {{width}}%;  left: {{left}}%;" data-start="{{ start }}" data-dauer="{{ duration }}" data-ende="{{ ende }}" data-farbe="{{farbe}}" data-spalten-gesamt="{{spalten_gesamt}}" data-spalte="{{ spalte }}">
+									<span class="titel">{{ summary }}</span>
+									<span class="raum">{{ location }}</span>
+									<span class="zeit">{{ time }}</span>
+									<div class="details">
+										<!-- <div class="pfeil">&#9664;</div> -->
+										<span class="titel">{{ summary }}</span>
+										<dl class="liste">
+											{{#location}}
+												<dt>Raum:</dt>
+												<dd>{{location}}</dd>
+											{{/location}}
+											
+										
+											{{#time}}
+												<dt>Zeit:</dt>
+												<dd>{{#datum}}{{datum}}, {{/datum}}{{ time }} Uhr</dd>
+											{{/time}}
+											
+											<!-- <span class="raum">Raum: {{ location }}</span>
+											<span class="zeit">Zeit: {{datum}}, {{ time }}</span> -->
+										</dl>
+										<div class="details">
+											<span class="komplett" >
+												{{{ description_komplett }}}
+											</span>
+										</div>
+									</div>
+								</a>
+							{{/nicht_ganztagig}}
+						{{/termine}}
+					</div>
+				{{/tage}}
+
+				<div class="zeitleiste hint--left hint--always" data-hint="00:00"> </div>
+			</div>
+
+			<div class="popup">
+				<a href="#" class="schliessen">&#8855;</a>
+				<span class="inhalt"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+      (function() {
+        $().ready(function() {
+          
+
+          /*var termin_box = $(".termin");
+          termin_box.click(function() {
+
+            var termin = $(this),
+            details_alle = $(".details"),
+            details = termin.find(".details");
+            details_alle.hide();
+            
+            details.show();
+
+          }); */
+
+
+          $(document).mouseup(function (e) {
+
+              var container = $(".popup");
+              console.log(e);
+              if (container.has(e.target).length === 0) {
+                  container.hide();
+              }
+          });
+
+          $(".termin").click(function() {
+            console.log($(this).find(".details").html());
+            showInPopup($(this).find(".details").html());
+            //$(this).find(".details").show();
+          });
+
+
+          $(document).mouseup(function (e) {
+
+              var container = $(".intervall .buttons");
+
+              if (container.has(e.target).length === 0) {
+                  container.hide();
+              }
+          });
+
+          function showInPopup( html ) {
+            $(".popup").show().find(".inhalt").html(html);
+          }
+
+          function hidePopup() {
+             $(".popup").hide();
+          }
+
+          $(".aktion").click(function(e) { 
+            e.preventDefault();
+            // console.log($(this).siblings().find(".buttons"));
+            $(".buttons").show();
+          });
+
+          $(".weiter-lesen").click(function(e){
+            e.preventDefault();
+            $(this).parent().hide().parent().find(".komplett").show();
+          });
+
+          $(".schliessen").click(function(e) {
+            e.preventDefault();
+            hidePopup();
+          });
+
+
+          // Zeitleiste
+
+          var zeitleiste = $(".zeitleiste").hide(),
+              tag = $(".tag"),
+              timer = null;
+
+          $(".tage .tag, .tagesansicht").mousemove(function(e) {
+            var tages_anfang,
+                offset,
+                stunden,
+                minuten,
+                tag_scrolltotop = $(".tage").scrollTop();
+
+            window.clearTimeout(timer);
+            zeitleiste.fadeIn();
+
+            offset = e.pageY - tag.offset().top - 35;
+            zeitleiste.css("top", offset);
+            
+            tages_anfang = $(".tage .tag, .tagesansicht div.tag").data("anfang").split(":");
+            stunden = Math.floor((offset - 25 + tag_scrolltotop) / 60) + tages_anfang[0] * 1;
+            minuten = Math.floor((offset - 25 + tag_scrolltotop) - Math.floor((offset - 25 + tag_scrolltotop) / 60)*60) + tages_anfang[1] * 1;
+
+            stunden = (stunden<10 ? "0" : "") + stunden;
+            minuten = (minuten<10 ? "0" : "") + minuten;
+            zeitleiste.attr("data-hint", stunden+":"+minuten);
+            
+            timer = window.setTimeout(function() {
+                zeitleiste.fadeOut();
+              }, 2000);
+          });
+
+        });
+      })();
+      </script>

@@ -1,0 +1,161 @@
+<div class="kalender gross">
+	<div class="menue">
+		<span class="zeit buttons">
+			<a href="{{dateiname}}?monat_{{datum_zurueck}}" class="vergangenheit">&#9664;</a>
+			<a href="{{dateiname}}?monat" class="heute">Heute</a>
+			<a href="{{dateiname}}?monat_{{datum_vor}}" class="zukunft">&#9654;</a>
+		</span>
+
+		<span class="titel">{{ monat }}</span>
+
+		<span class="intervall">
+			<a class="aktion" href="#">&#9776;</a>
+			<div class="buttons">
+				<span class="pfeil">&#9664;</span>
+				<a href="{{dateiname}}?tag_{{datum_aktuell}}" class="tag">Tag</a>
+				<a href="{{dateiname}}?woche_{{datum_aktuell}}" class="woche">Woche</a>
+				<span class="monat aktiv">Monat</span>
+				<a href="{{dateiname}}?liste" class="liste">Liste</a>
+			</div>
+		</span>
+
+	</div>
+
+	<div class="inhalt">
+		<div class="monatsansicht">
+			<div class="kopfzeile">
+				<div><span class="tag">Mo<span class="lang">ntag</span></div>
+				<div><span class="tag">Di<span class="lang">enstag</span></div>
+				<div><span class="tag">Mi<span class="lang">ttwoch</span></div>
+				<div><span class="tag">Do<span class="lang">nnerstag</span></div>
+				<div><span class="tag">Fr<span class="lang">eitag</span></div>
+				<div class="wochenende"><span class="tag">Sa<span class="lang">mstag</span></div>
+				<div class="wochenende sonntag"><span class="tag">So<span class="lang">nntag</span></div>
+			</div>
+
+			{{#wochen}}
+				<div class="woche">
+					{{#tage}}
+						<div class="{{#heute}} heute {{/heute}} {{#nicht_im_monat}}nicht-aktuell{{/nicht_im_monat}} {{#wochenende}} wochenende {{/wochenende}} {{#sonntag}} sonntag {{/sonntag}} ">
+							<span class="datum">{{datum_kurz}}.</span>
+							<div class="termine">
+								<div class="center">
+									{{#termine}}
+										<a href="javascript:void(0);" data-hint="{{summary}}" class="termin hint--left" data-farbe="{{farbe}}" >
+											<span class="titel">{{ summary }}</span>
+											<div class="details">
+												<span class="titel">{{ summary }}</span>
+												<dl class="liste">
+													{{#location}}
+														<dt>Raum:</dt>
+														<dd>{{location}}</dd>
+													{{/location}}
+													{{#ganztagig}}
+														<dt>Zeit:</dt>
+														<dd>{{#datum}}{{datum}}{{/datum}}</dd>
+													{{/ganztagig}}
+													{{#nicht_ganztagig}}
+														{{#time}}
+															<dt>Zeit:</dt>
+															<dd>{{#datum}}{{datum}}, {{/datum}}{{ time }} Uhr</dd>
+														{{/time}}
+													{{/nicht_ganztagig}}
+													<!-- <span class="raum">Raum: {{ location }}</span>
+													<span class="zeit">Zeit: {{datum}}, {{ time }}</span> -->
+												</dl>
+												{{#description_vorschau}}
+													<div class="details">
+														
+														{{#description_komplett }}
+															<span class="komplett">{{{ description_komplett }}}</span>
+														{{/description_komplett }}
+													</div>
+												{{/description_vorschau}}
+											</div>
+										</a>
+									{{/termine}}
+								</div>
+							</div>
+						</div>
+					{{/tage}}
+				</div>
+			{{/wochen}}
+			<div class="popup">
+				<a href="#" class="schliessen">&#8855;</a>
+				<span class="inhalt"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+      (function() {
+        $().ready(function() {
+          
+
+          /*var termin_box = $(".termin");
+          termin_box.click(function() {
+
+            var termin = $(this),
+            details_alle = $(".details"),
+            details = termin.find(".details");
+            details_alle.hide();
+            
+            details.show();
+
+          }); */
+
+
+          $(document).mouseup(function (e) {
+
+              var container = $(".popup");
+              console.log(e);
+              if (container.has(e.target).length === 0) {
+                  container.hide();
+              }
+          });
+
+          $(".termin").click(function() {
+            console.log($(this).find(".details").html());
+            showInPopup($(this).find(".details").html());
+            //$(this).find(".details").show();
+          });
+
+
+          $(document).mouseup(function (e) {
+
+              var container = $(".intervall .buttons");
+
+              if (container.has(e.target).length === 0) {
+                  container.hide();
+              }
+          });
+
+          function showInPopup( html ) {
+            $(".popup").show().find(".inhalt").html(html);
+          }
+
+          function hidePopup() {
+             $(".popup").hide();
+          }
+
+          $(".aktion").click(function(e) { 
+            e.preventDefault();
+            // console.log($(this).siblings().find(".buttons"));
+            $(".buttons").show();
+          });
+
+          $(".weiter-lesen").click(function(e){
+            e.preventDefault();
+            $(this).parent().hide().parent().find(".komplett").show();
+          });
+
+          $(".schliessen").click(function(e) {
+            e.preventDefault();
+            hidePopup();
+          });
+
+        });
+      })();
+      </script>

@@ -1,0 +1,688 @@
+body {
+  font-family: "Verdana", Arial, sans-serif; }
+
+.clear-fix:after {
+  /* für Firefox, IE8, Opera, Safari, etc. */
+  content: ".";
+  display: block;
+  visibility: hidden; }
+
+* + html .clear-fix {
+  /* für IE7 */
+  display: inline-block; }
+
+* html .clear-fix {
+  /* für IE6 */
+  height: 1%; }
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.cf:after {
+  clear: both; }
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+  *zoom: 1; }
+
+.liste dt {
+  float: left;
+  width: 50px; }
+
+.content {
+  max-width: 80em; }
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.kalender {
+  border: solid 1px #dddddd;
+  color: #444; }
+  .kalender .menue {
+    position: relative;
+    background-color: red;
+    border: solid 1px white;
+    background-image: -webkit-linear-gradient(top, white, #f2f2f2);
+    background-color: #FAFAFA;
+    box-shadow: 0 1px 2px #cccccc;
+    height: 40px;
+    margin-bottom: 4px; }
+    .kalender .menue a {
+      text-decoration: none;
+      color: #555555; }
+    .kalender .menue a:hover {
+      color: #B00E0E;
+      font-weight: 100; }
+    .kalender .menue .buttons {
+      font-size: 0.9em;
+      margin: 6px;
+      padding: 0 6px;
+      padding-top: 2px;
+      border: solid 1px #cccccc;
+      border-radius: 3px;
+      display: inline-block;
+      background-image: -webkit-linear-gradient(top, white, #f2f2f2);
+      text-shadow: 0 1px 0 white;
+      line-height: 24px; }
+      .kalender .menue .buttons .aktiv {
+        font-weight: 600; }
+      .kalender .menue .buttons .aktiv:hover {
+        color: #555555; }
+    .kalender .menue .zeit {
+      position: absolute; }
+    .kalender .menue .intervall {
+      position: absolute;
+      top: 0px;
+      right: 0px; }
+      .kalender .menue .intervall .buttons {
+        display: inline-block;
+        position: relative;
+        top: 0px;
+        right: 0px;
+        box-shadow: none;
+        background-image: -webkit-linear-gradient(top, white, #f2f2f2); }
+        .kalender .menue .intervall .buttons .pfeil {
+          display: none; }
+        .kalender .menue .intervall .buttons a {
+          padding: 2px; }
+      .kalender .menue .intervall .aktion {
+        display: none;
+        line-height: 40px;
+        margin-right: 10px; }
+    .kalender .menue .titel {
+      display: block;
+      position: relative;
+      top: 9px;
+      margin-left: 105px;
+      margin-right: 220px;
+      text-align: center;
+      font-size: 1.2em; }
+  .kalender .inhalt .listenansicht {
+    position: relative; }
+    .kalender .inhalt .listenansicht .termine .termin {
+      padding: 10px 20px;
+      border-bottom: solid 1px #eeeeee; }
+      .kalender .inhalt .listenansicht .termine .termin .titel {
+        display: block;
+        margin-bottom: 10px; }
+      .kalender .inhalt .listenansicht .termine .termin .raum, .kalender .inhalt .listenansicht .termine .termin .zeit {
+        display: block;
+        font-size: 0.9em; }
+      .kalender .inhalt .listenansicht .termine .termin .details {
+        margin-top: 10px;
+        font-size: 0.9em;
+        border-top: solid 1px #f9f9f9;
+        padding-top: 5px; }
+        .kalender .inhalt .listenansicht .termine .termin .details .komplett {
+          display: none; }
+  .kalender .inhalt .tagesansicht .popup, .kalender .inhalt .wochenansicht .popup, .kalender .inhalt .monatsansicht .popup {
+    display: none;
+    position: absolute;
+    top: 115px;
+    left: 20px;
+    right: 20px;
+    background-color: white;
+    padding: 10px;
+    border: solid 1px #999999;
+    border-radius: 5px;
+    box-shadow: 0 0 2px #999999, 0 0 3000px;
+    z-index: 5; }
+    .kalender .inhalt .tagesansicht .popup .schliessen, .kalender .inhalt .wochenansicht .popup .schliessen, .kalender .inhalt .monatsansicht .popup .schliessen {
+      text-decoration: none;
+      font-size: 2em;
+      float: right;
+      margin-top: -12px; }
+    .kalender .inhalt .tagesansicht .popup .titel, .kalender .inhalt .wochenansicht .popup .titel, .kalender .inhalt .monatsansicht .popup .titel {
+      display: block;
+      margin-bottom: 10px; }
+    .kalender .inhalt .tagesansicht .popup .raum, .kalender .inhalt .tagesansicht .popup .zeit, .kalender .inhalt .wochenansicht .popup .raum, .kalender .inhalt .wochenansicht .popup .zeit, .kalender .inhalt .monatsansicht .popup .raum, .kalender .inhalt .monatsansicht .popup .zeit {
+      display: block;
+      font-size: 0.9em; }
+    .kalender .inhalt .tagesansicht .popup .komplett, .kalender .inhalt .tagesansicht .popup .details, .kalender .inhalt .wochenansicht .popup .komplett, .kalender .inhalt .wochenansicht .popup .details, .kalender .inhalt .monatsansicht .popup .komplett, .kalender .inhalt .monatsansicht .popup .details {
+      margin-top: 10px;
+      font-size: 0.9em; }
+  .kalender .inhalt .tagesansicht {
+    position: relative; }
+    .kalender .inhalt .tagesansicht .kopfzeile {
+      height: 28px;
+      border-bottom: solid 1px #eeeeee;
+      box-shadow: inset 0 -1px 0px #fbfbfb; }
+      .kalender .inhalt .tagesansicht .kopfzeile div {
+        height: 26px;
+        padding: 0 6px;
+        padding-top: 2px;
+        margin-top: 2px; }
+      .kalender .inhalt .tagesansicht .kopfzeile .tag .lang {
+        display: inline!important; }
+    .kalender .inhalt .tagesansicht .tag-container {
+      max-height: 530px;
+      overflow-y: scroll; }
+      .kalender .inhalt .tagesansicht .tag-container .tag {
+        position: relative;
+        width: 100%;
+        margin-top: 0px!important;
+        overflow-y: scroll;
+        background: -webkit-linear-gradient(top, #f0f0f0 0%, white 2%) 0 8px;
+        background-size: 100% 60px;
+        background-position: 0 -1px; }
+        .kalender .inhalt .tagesansicht .tag-container .tag .termin {
+          position: absolute;
+          left: 5%;
+          right: 5%;
+          padding: 4px;
+          z-index: 3;
+          border-radius: 5px;
+          box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+          text-shadow: 0 -1px 0 #45659c;
+          background-color: #5981ae;
+          color: white;
+          font-size: 0.8em;
+          text-decoration: none;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          transition: all 0.15s ease-in-out;
+          -webkit-transition: all 0.15s ease-in-out; }
+          .kalender .inhalt .tagesansicht .tag-container .tag .termin .titel {
+            overflow: hidden;
+            -webkit-transform: rotate(0deg);
+            position: relative;
+            left: 0px; }
+          .kalender .inhalt .tagesansicht .tag-container .tag .termin .raum, .kalender .inhalt .tagesansicht .tag-container .tag .termin .zeit {
+            display: block;
+            font-size: 0.8em; }
+        .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus {
+          z-index: 5!important;
+          font-weight: 100; }
+          .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover .titel, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus .titel {
+            display: inline-block; }
+          .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover .raum, .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover .zeit, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus .raum, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus .zeit {
+            display: block; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="7"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="7"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="7"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="8"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="8"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="8"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="9"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="9"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="9"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="10"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="10"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="10"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="11"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="11"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="11"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="12"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="12"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="12"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="13"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="13"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="13"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="14"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="14"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="14"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="15"] .titel, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="15"] .raum, .kalender .inhalt .tagesansicht .tag-container .tag [data-spalten-gesamt="15"] .zeit {
+          display: none; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Blau"] {
+          box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+          text-shadow: 0 -1px 0 #45659c;
+          background-color: #5981ae; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Blau"]:hover {
+          background-color: #4e74a0; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Rot"] {
+          background-color: #cf6561;
+          box-shadow: 0 1px 0px #c05a55, inset 0 0 2px #742623;
+          text-shadow: 0 -1px 0 #c05a55; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Rot"]:hover {
+          background-color: #c9524d; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Gruen"] {
+          background-color: #48a86b;
+          box-shadow: 0 1px 0px #398454, inset 0 0 2px #1a3d27;
+          text-shadow: 0 -1px 0 #398454; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Gruen"]:hover {
+          background-color: #409660; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Orange"] {
+          background-color: #e2ac67;
+          box-shadow: 0 1px 0px #da953c, inset 0 0 2px #945f1c;
+          text-shadow: 0 -1px 0 #da953c; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Orange"]:hover {
+          background-color: #dea052; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Tuerkis"] {
+          background-color: #7edbec;
+          box-shadow: 0 1px 0px #25c2df, inset 0 0 2px #1b9eb6;
+          text-shadow: 0 -1px 0 #25c2df; }
+        .kalender .inhalt .tagesansicht .tag-container .tag [data-farbe="Tuerkis"]:hover {
+          background-color: #68d5e9; }
+        .kalender .inhalt .tagesansicht .tag-container .tag .details {
+          display: none;
+          position: absolute;
+          left: 20px;
+          right: 20px;
+          color: #333;
+          text-shadow: none;
+          background-color: white;
+          border: solid 1px #bbbbbb;
+          border-radius: 10px;
+          padding: 10px;
+          z-index: 4;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+          .kalender .inhalt .tagesansicht .tag-container .tag .details .pfeil {
+            position: absolute;
+            left: -23px;
+            top: 10px;
+            font-size: 30px;
+            text-shadow: 2px 0 0 white, -1px 0 5px rgba(0, 0, 0, 0.4);
+            color: white; }
+        .kalender .inhalt .tagesansicht .tag-container .tag .details.links {
+          right: 105%;
+          left: auto; }
+          .kalender .inhalt .tagesansicht .tag-container .tag .details.links .pfeil {
+            right: -24px;
+            -webkit-transform: rotate(180deg); }
+    .kalender .inhalt .tagesansicht .zeitleiste {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      height: 1px;
+      background-color: #383838; }
+  .kalender .inhalt .wochenansicht {
+    position: relative; }
+    .kalender .inhalt .wochenansicht .ganztagige > div {
+      position: relative;
+      width: 14.28%;
+      float: left;
+      min-height: 1px; }
+      .kalender .inhalt .wochenansicht .ganztagige > div .termin {
+        width: 98%;
+        margin: 4px auto;
+        padding: 4px;
+        border-radius: 5px;
+        color: white;
+        overflow: hidden;
+        font-size: 0.7em;
+        text-decoration: none; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin [data-farbe="Blau"] {
+          box-shadow: 0 1px 0px #45659c;
+          text-shadow: 0 -1px 0 #45659c;
+          background-color: #5981ae; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin .titel {
+          overflow: hidden;
+          -webkit-transform: rotate(0deg);
+          position: relative;
+          left: 0px; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin .raum, .kalender .inhalt .wochenansicht .ganztagige > div .termin .zeit {
+          display: block;
+          position: absolute;
+          bottom: 4px;
+          right: 4px;
+          float: right;
+          width: 100%;
+          font-size: 0.7em;
+          text-align: right; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin .raum {
+          bottom: 16px; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin .details {
+          display: none;
+          position: absolute;
+          left: 105%;
+          top: 0px;
+          width: 400px;
+          color: #333;
+          text-shadow: none;
+          background-color: white;
+          border: solid 1px #bbbbbb;
+          border-radius: 10px;
+          padding: 10px;
+          z-index: 4;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+          .kalender .inhalt .wochenansicht .ganztagige > div .termin .details .pfeil {
+            position: absolute;
+            left: -23px;
+            top: 10px;
+            font-size: 30px;
+            text-shadow: 2px 0 0 white, -1px 0 5px rgba(0, 0, 0, 0.4);
+            color: white; }
+        .kalender .inhalt .wochenansicht .ganztagige > div .termin .details.links {
+          right: 105%;
+          left: auto; }
+          .kalender .inhalt .wochenansicht .ganztagige > div .termin .details.links .pfeil {
+            right: -24px;
+            -webkit-transform: rotate(180deg); }
+      .kalender .inhalt .wochenansicht .ganztagige > div .termin:hover {
+        background-color: #cf6561;
+        box-shadow: 0 1px 0px #c05a55;
+        text-shadow: 0 -1px 0 #c05a55; }
+    .kalender .inhalt .wochenansicht .kopfzeile {
+      box-shadow: inset 0 -1px 0px #fbfbfb;
+      height: 24px; }
+      .kalender .inhalt .wochenansicht .kopfzeile > div {
+        position: relative;
+        width: 14.28%;
+        float: left;
+        top: 0px;
+        padding: 0 6px;
+        padding-top: 2px;
+        margin-top: 2px;
+        border-right: solid 1px #f6f6f6; }
+        .kalender .inhalt .wochenansicht .kopfzeile > div .datum {
+          font-size: 1em; }
+        .kalender .inhalt .wochenansicht .kopfzeile > div .tag {
+          position: relative;
+          font-size: 0.8em; }
+          .kalender .inhalt .wochenansicht .kopfzeile > div .tag .lang {
+            display: inline-block; }
+      .kalender .inhalt .wochenansicht .kopfzeile div:last-child {
+        border-right: none; }
+    .kalender .inhalt .wochenansicht .tage {
+      max-height: 530px;
+      width: 100%;
+      margin-top: 0px!important;
+      overflow-y: scroll;
+      border-top: solid 1px #eeeeee; }
+      .kalender .inhalt .wochenansicht .tage > .tag {
+        position: relative;
+        width: 14.28%;
+        float: left;
+        background: -webkit-linear-gradient(top, #f0f0f0 0%, white 2%) 0 8px;
+        background-size: 100% 60px;
+        background-position: 0 -1px;
+        border-right: solid 1px #eeeeee; }
+        .kalender .inhalt .wochenansicht .tage > .tag .termin {
+          position: absolute;
+          width: 90%;
+          padding: 4px;
+          z-index: 2;
+          border-radius: 5px;
+          color: white;
+          overflow: hidden;
+          font-size: 0.7em;
+          text-decoration: none;
+          box-shadow: 0 1px 0px #45659c, inset 0 0 2px #25457c;
+          text-shadow: 0 -1px 0 #45659c;
+          background-color: #5981ae;
+          transition: all 0.15s ease-in-out;
+          -webkit-transition: all 0.15s ease-in-out; }
+          .kalender .inhalt .wochenansicht .tage > .tag .termin .titel {
+            overflow: hidden;
+            -webkit-transform: rotate(0deg);
+            position: relative;
+            left: 0px; }
+          .kalender .inhalt .wochenansicht .tage > .tag .termin .raum, .kalender .inhalt .wochenansicht .tage > .tag .termin .zeit {
+            display: block;
+            font-size: 0.8em; }
+          .kalender .inhalt .wochenansicht .tage > .tag .termin .details {
+            display: none;
+            position: absolute;
+            left: 105%;
+            top: 0px;
+            width: 400px;
+            color: #333;
+            text-shadow: none;
+            background-color: white;
+            border: solid 1px #bbbbbb;
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 4;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+            .kalender .inhalt .wochenansicht .tage > .tag .termin .details .pfeil {
+              position: absolute;
+              left: -23px;
+              top: 10px;
+              font-size: 30px;
+              text-shadow: 2px 0 0 white, -1px 0 5px rgba(0, 0, 0, 0.4);
+              color: white; }
+          .kalender .inhalt .wochenansicht .tage > .tag .termin .details.links {
+            right: 105%;
+            left: auto; }
+            .kalender .inhalt .wochenansicht .tage > .tag .termin .details.links .pfeil {
+              right: -24px;
+              -webkit-transform: rotate(180deg); }
+        .kalender .inhalt .wochenansicht .tage > .tag .termin:hover, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus {
+          z-index: 5!important;
+          width: 90%!important;
+          left: 5%!important; }
+          .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .titel, .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .raum, .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .zeit, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .titel, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .raum, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .zeit {
+            zoom: 1;
+            filter: alpha(opacity=100);
+            opacity: 1; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="2"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="2"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="2"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="3"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="3"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="3"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="4"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="4"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="4"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="5"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="5"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="5"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="6"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="6"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="6"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="7"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="7"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="7"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="8"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="8"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="8"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="9"] .titel, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="9"] .raum, .kalender .inhalt .wochenansicht .tage > .tag [data-spalten-gesamt="9"] .zeit {
+          zoom: 1;
+          filter: alpha(opacity=0);
+          opacity: 0.0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Blau"] {
+          box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+          text-shadow: 0 -1px 0 #45659c;
+          background-color: #5981ae; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Blau"]:hover {
+          background-color: #4e74a0; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Rot"] {
+          background-color: #cf6561;
+          box-shadow: 0 1px 0px #c05a55, inset 0 0 2px #742623;
+          text-shadow: 0 -1px 0 #c05a55; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Rot"]:hover {
+          background-color: #c9524d; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Gruen"] {
+          background-color: #48a86b;
+          box-shadow: 0 1px 0px #398454, inset 0 0 2px #1a3d27;
+          text-shadow: 0 -1px 0 #398454; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Gruen"]:hover {
+          background-color: #409660; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Orange"] {
+          background-color: #e2ac67;
+          box-shadow: 0 1px 0px #da953c, inset 0 0 2px #945f1c;
+          text-shadow: 0 -1px 0 #da953c; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Orange"]:hover {
+          background-color: #dea052; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Tuerkis"] {
+          background-color: #7edbec;
+          box-shadow: 0 1px 0px #25c2df, inset 0 0 2px #1b9eb6;
+          text-shadow: 0 -1px 0 #25c2df; }
+        .kalender .inhalt .wochenansicht .tage > .tag [data-farbe="Tuerkis"]:hover {
+          background-color: #68d5e9; }
+      .kalender .inhalt .wochenansicht .tage > div:last-child {
+        border-right: none; }
+      .kalender .inhalt .wochenansicht .tage > div:hover, .kalender .inhalt .wochenansicht .tage > div.wochenende {
+        background: -webkit-linear-gradient(top, #f0f0f0 0%, #fcfcfc 2%) 0 8px;
+        background-size: 100% 60px;
+        background-position: 0 -1px; }
+      .kalender .inhalt .wochenansicht .tage > div.heute {
+        background: -webkit-linear-gradient(top, #f0f0f0 0%, #fdfad3 2%) 0 8px;
+        background-size: 100% 60px;
+        background-position: 0 -1px; }
+      .kalender .inhalt .wochenansicht .tage .zeitleiste {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        height: 1px;
+        background-color: #383838; }
+  .kalender .inhalt .monatsansicht {
+    position: relative; }
+    .kalender .inhalt .monatsansicht .kopfzeile {
+      height: 28px;
+      border-bottom: solid 1px #eeeeee;
+      box-shadow: inset 0 -1px 0px #fbfbfb; }
+      .kalender .inhalt .monatsansicht .kopfzeile > div {
+        position: relative;
+        width: 14.28%;
+        float: left;
+        height: 26px;
+        top: 0px;
+        padding: 0 6px;
+        padding-top: 2px;
+        margin-top: 2px;
+        border-right: solid 1px #f6f6f6; }
+        .kalender .inhalt .monatsansicht .kopfzeile > div .tag {
+          display: block;
+          text-align: center;
+          position: relative;
+          font-size: 1em; }
+          .kalender .inhalt .monatsansicht .kopfzeile > div .tag .lang {
+            display: inline-block; }
+      .kalender .inhalt .monatsansicht .kopfzeile > div:last-child {
+        border-right: none; }
+    .kalender .inhalt .monatsansicht .woche {
+      position: relative;
+      height: 100px;
+      border-bottom: solid 1px #dddddd; }
+      .kalender .inhalt .monatsansicht .woche > div {
+        display: inline-block;
+        float: left;
+        width: 14.285%;
+        height: 100%;
+        border-right: solid 1px #eeeeee;
+        padding: 5px; }
+        .kalender .inhalt .monatsansicht .woche > div .datum {
+          display: block;
+          margin-top: 12px;
+          text-align: center;
+          font-size: 1.4em;
+          color: #777; }
+        .kalender .inhalt .monatsansicht .woche > div .termine {
+          width: 100%;
+          text-align: center;
+          margin-top: 8px;
+          margin-left: 4px; }
+          .kalender .inhalt .monatsansicht .woche > div .termine .center {
+            display: inline-block;
+            *display: inline;
+            /* IE*/
+            *zoom: 1;
+            /* IE*/
+            text-align: left; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center .termin {
+              float: left;
+              margin: 1px;
+              width: 15px;
+              height: 15px;
+              border-radius: 100%;
+              box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+              text-shadow: 0 -1px 0 #45659c;
+              background-color: #5981ae; }
+              .kalender .inhalt .monatsansicht .woche > div .termine .center .termin div, .kalender .inhalt .monatsansicht .woche > div .termine .center .termin span {
+                display: none; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Blau"] {
+              box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+              text-shadow: 0 -1px 0 #45659c;
+              background-color: #5981ae; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Blau"]:hover {
+              background-color: #4e74a0; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Rot"] {
+              background-color: #cf6561;
+              box-shadow: 0 1px 0px #c05a55, inset 0 0 2px #742623;
+              text-shadow: 0 -1px 0 #c05a55; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Rot"]:hover {
+              background-color: #c9524d; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Gruen"] {
+              background-color: #48a86b;
+              box-shadow: 0 1px 0px #398454, inset 0 0 2px #1a3d27;
+              text-shadow: 0 -1px 0 #398454; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Gruen"]:hover {
+              background-color: #409660; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Orange"] {
+              background-color: #e2ac67;
+              box-shadow: 0 1px 0px #da953c, inset 0 0 2px #945f1c;
+              text-shadow: 0 -1px 0 #da953c; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Orange"]:hover {
+              background-color: #dea052; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Tuerkis"] {
+              background-color: #7edbec;
+              box-shadow: 0 1px 0px #25c2df, inset 0 0 2px #1b9eb6;
+              text-shadow: 0 -1px 0 #25c2df; }
+            .kalender .inhalt .monatsansicht .woche > div .termine .center [data-farbe="Tuerkis"]:hover {
+              background-color: #68d5e9; }
+      .kalender .inhalt .monatsansicht .woche > div.heute {
+        background-color: #fdfad3; }
+      .kalender .inhalt .monatsansicht .woche .nicht-aktuell {
+        background-color: #fafafa; }
+      .kalender .inhalt .monatsansicht .woche > div:last-child {
+        border-right: none; }
+
+@media screen and (max-width: 1970px) {
+  .kalender .tag .lang {
+    display: none!important; } }
+@media screen and (max-width: 1400px) {
+  .kalender .wochenansicht .sonntag, .kalender .monatsansicht .sonntag {
+    display: none!important; }
+
+  .kalender .wochenansicht .tage .tag, .kalender .monatsansicht .tage .tag {
+    width: 16.66667% !important; }
+  .kalender .wochenansicht .kopfzeile > div, .kalender .wochenansicht .woche > div, .kalender .monatsansicht .kopfzeile > div, .kalender .monatsansicht .woche > div {
+    width: 16.66667% !important; }
+  .kalender .wochenansicht .kopfzeile .datum, .kalender .monatsansicht .kopfzeile .datum {
+    font-size: 0.8em!important; }
+  .kalender .wochenansicht .kopfzeile .tag, .kalender .monatsansicht .kopfzeile .tag {
+    font-size: 0.7em!important; }
+  .kalender .wochenansicht .kopfzeile > div, .kalender .monatsansicht .kopfzeile > div {
+    padding-left: 3px;
+    padding-right: 3px; } }
+@media screen and (min-width: 1020px) {
+  .kalender .menue .intervall .buttons {
+    display: inline-block!important; } }
+@media screen and (max-width: 1020px) {
+  .kalender .menue .intervall .buttons {
+    display: none;
+    position: absolute;
+    right: -5px;
+    top: 30px;
+    background-color: white;
+    background-image: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    z-index: 10; }
+    .kalender .menue .intervall .buttons .pfeil {
+      display: inline-block;
+      position: absolute;
+      top: -15px;
+      right: 8px;
+      color: white;
+      text-shadow: -2px 0px 3px rgba(0, 0, 0, 0.3);
+      -webkit-transform: rotate(90deg); }
+    .kalender .menue .intervall .buttons a {
+      padding: 10px; }
+  .kalender .menue .intervall .aktion {
+    display: inline-block; }
+  .kalender .menue .titel {
+    margin-right: 30px; } }
+@media screen and (max-width: 1020px) {
+  .kalender .wochenansicht .wochenende {
+    display: none; }
+
+  .kalender .wochenansicht .tage > div, .kalender .wochenansicht .kopfzeile > div {
+    width: 20% !important; } }

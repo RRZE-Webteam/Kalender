@@ -1,0 +1,1078 @@
+@import "_media-queries.scss";
+
+
+body {
+	font-family: "Verdana", Arial, sans-serif;
+}
+
+.clear-fix:after {  /* für Firefox, IE8, Opera, Safari, etc. */
+    content: ".";  
+    display: block;
+    visibility: hidden;
+}
+ 
+* + html .clear-fix { /* für IE7 */
+    display: inline-block;
+}
+ 
+* html .clear-fix { /* für IE6 */
+	height: 1%;
+}
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+.liste dt {
+	float: left;
+	width: 50px;
+}
+
+
+.content {
+	max-width: 80em;
+}
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.kalender {
+	border: solid 1px #DDD;
+	color: #444;
+
+	.menue {
+		$menue_font_color: #555;
+		$menue_height: 40px;
+
+		position: relative;
+		background-color: red;
+		border: solid 1px white;
+		background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+		background-color: #FAFAFA;
+		box-shadow: 0 1px 2px #CCC;
+		height: $menue_height;
+		margin-bottom: 4px;
+
+
+		a {
+			text-decoration: none;
+			color: $menue_font_color;
+		}
+
+		a:hover {
+			color: #B00E0E;
+			font-weight: 100;
+		}
+
+		.buttons {
+			font-size: 0.9em;
+
+			margin: 6px;
+			padding: 0 6px;
+			padding-top: 2px;
+
+			border: solid 1px #CCC;
+			border-radius: 3px;
+			display: inline-block;
+
+			background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+			text-shadow: 0 1px 0 white;
+			line-height: 24px;
+
+			.aktiv {
+				font-weight: 600;
+			}
+
+			.aktiv:hover {
+				color: $menue_font_color;
+			}
+		}
+
+		.zeit {
+			position: absolute;
+			
+		}
+
+		.intervall {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+
+			.buttons {
+				
+				display: inline-block;
+
+				position: relative;
+				top: 0px;
+				right: 0px;
+				box-shadow: none;
+
+				background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+				
+				.pfeil {
+					display: none;
+				}
+
+				a {
+					padding: 2px;
+				}
+				
+			}
+
+			.aktion {
+				display: none;
+				line-height: 40px;
+				margin-right: 10px;
+			}
+
+			
+		}
+
+		.titel {
+			display: block;
+			position: relative;
+			top: 9px;
+
+			margin-left: 105px;
+			margin-right: 220px;
+			
+			text-align: center;
+			font-size: 1.2em;
+		}
+	} // End .menue
+
+	.inhalt {
+
+		.listenansicht {
+			position: relative;
+			.termine {
+				.termin {
+					padding: 10px 20px;
+					border-bottom: solid 1px #eee;
+
+					.titel  {
+						display: block;
+						margin-bottom: 10px; 
+					}
+
+					.raum, .zeit {
+						display: block;
+
+						font-size: 0.9em;
+					}
+
+					.details {
+						margin-top: 10px;
+						font-size: 0.9em;
+						border-top: solid 1px #f9f9f9;
+						padding-top: 5px;
+
+						.vorschau {
+
+						}
+
+						.komplett {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+
+		.tagesansicht, .wochenansicht, .monatsansicht {
+			.popup {
+				display: none;
+				position: absolute;
+				top: 115px;
+				left: 20px;
+				right: 20px;
+				background-color: white;
+				padding: 10px;
+				border: solid 1px #999;
+				border-radius: 5px;
+				box-shadow: 0 0 2px #999, 0 0 3000px;
+				z-index: 5;
+
+				.schliessen {
+					text-decoration: none;
+					font-size: 2em;
+					float: right;
+					margin-top: -12px;
+				}
+
+				.titel  {
+					display: block;
+					margin-bottom: 10px; 
+				}
+
+				.raum, .zeit {
+					display: block;
+
+					font-size: 0.9em;
+				}
+
+				
+
+				.komplett, .details {
+					margin-top: 10px;
+					font-size: 0.9em;
+				}
+				
+			}
+		}
+
+
+		.tagesansicht {
+			position: relative;
+
+			.kopfzeile {
+				height: 28px;
+				border-bottom: solid 1px #EEE;
+				box-shadow: inset 0 -1px 0px #FBFBFB;
+
+				div {
+				
+					height: 26px;
+					padding: 0 6px;
+					padding-top: 2px;
+					margin-top: 2px;
+					
+				}
+
+				.tag .lang {
+					display: inline!important;
+				}
+			}
+
+			.tag-container {
+				max-height: 530px;
+				overflow-y: scroll;
+
+				.tag {
+					position: relative;
+					width: 100%;
+					margin-top: 0px!important;
+					overflow-y: scroll;
+						
+
+					background: -webkit-linear-gradient(top, #f0f0f0 0%, #fff 2%) 0 8px;
+					background-size: 100% 60px;
+					background-position: 0 -1px;
+					
+
+					.termin {
+							
+						position: absolute;
+						left: 5%;
+						right: 5%;
+						padding: 4px;
+						z-index: 3;
+
+						border-radius: 5px;
+						box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+						text-shadow: 0 -1px 0 #45659c;
+
+						background-color: #5981ae;
+						color: white;
+
+						font-size: 0.8em;
+
+						text-decoration: none;
+						text-overflow: ellipsis;
+						overflow: hidden;
+
+						transition: all 0.15s ease-in-out;
+				        -webkit-transition: all 0.15s ease-in-out;
+
+						.titel {
+							
+							overflow: hidden;						
+
+							-webkit-transform: rotate(0deg);
+							position: relative;
+							left: 0px;
+			
+						}
+
+						.raum, .zeit {
+							display: block;
+							font-size: 0.8em;
+						}
+						
+					}
+
+					.termin:hover, .termin:focus {
+						z-index: 5!important;
+						
+
+						font-weight: 100;
+						
+
+						.titel {
+							display: inline-block;
+						}
+
+						.raum, .zeit {
+							display: block;
+						}
+					}
+
+					@for $i from 7 through 15 {
+						[data-spalten-gesamt="#{$i}"]{
+							.titel, .raum, .zeit {
+								display: none;
+							}
+						}
+					}
+
+					[data-farbe="Blau"] {
+						box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+						text-shadow: 0 -1px 0 #45659c;
+						background-color: #5981ae;
+					}
+
+					[data-farbe="Blau"]:hover {
+						background-color: darken(#5981ae, 5%);
+					}
+
+					[data-farbe="Rot"] {
+						background-color: #cf6561;
+						box-shadow: 0 1px 0px #c05a55, inset 0 0 2px darken(#cf6561, 30%);
+						text-shadow: 0 -1px 0 #c05a55;
+					}
+
+					[data-farbe="Rot"]:hover {
+						background-color: darken(#cf6561, 5%);
+					}
+
+					[data-farbe="Gruen"] {
+						background-color: rgb(72, 168, 107);
+						box-shadow: 0 1px 0px darken(rgb(72, 168, 107), 10%), inset 0 0 2px darken(rgb(72, 168, 107), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(72, 168, 107), 10%);
+					}
+
+					[data-farbe="Gruen"]:hover {
+						background-color: darken(rgb(72, 168, 107), 5%);
+					}
+
+					[data-farbe="Orange"] {
+						background-color: rgb(226, 172, 103);
+						box-shadow: 0 1px 0px darken(rgb(226, 172, 103), 10%), inset 0 0 2px darken(rgb(226, 172, 103), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(226, 172, 103), 10%);
+					}
+
+					[data-farbe="Orange"]:hover {
+						background-color: darken(rgb(226, 172, 103), 5%);
+					}
+
+					[data-farbe="Tuerkis"] {
+						background-color: rgb(126, 219, 236);
+						box-shadow: 0 1px 0px darken(rgb(126, 219, 236), 20%), inset 0 0 2px darken(rgb(126, 219, 236), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(126, 219, 236), 20%);
+					}
+
+					[data-farbe="Tuerkis"]:hover {
+						background-color: darken(rgb(126, 219, 236), 5%);
+					}
+
+
+					$details_width: 400px;
+
+					.details {
+						display: none;
+						position: absolute;
+						left: 20px;
+						right: 20px;
+
+						color: #333;
+						text-shadow: none;
+						background-color: white;
+						border: solid 1px #BBB;
+						border-radius: 10px;
+						padding: 10px;
+						z-index: 4;
+						box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+						.pfeil {
+							position: absolute;
+							left: -23px;
+							top: 10px;
+							font-size: 30px;
+							text-shadow: 2px 0 0 white, -1px 0 5px rgba(0,0,0,0.4);
+							color: white;
+						}
+					}
+
+					.details.links {
+						right: 105%;
+						left: auto;
+
+						.pfeil {
+							right: -24px;
+							-webkit-transform: rotate(180deg);
+						}
+					}
+				}
+			}
+
+			.zeitleiste {
+				position: absolute;
+				left: 0px;
+				right: 0px;
+				height: 1px;
+				background-color: #383838;
+			}
+		}
+
+		.wochenansicht {
+			position: relative;
+
+			.ganztagige {
+				>div {
+					position: relative;
+					width: 14.28%;
+					float: left;
+					min-height: 1px;
+
+					.termin {
+						
+						width: 98%;
+						margin: 4px auto;
+						padding: 4px;
+
+						border-radius: 5px;
+						
+						color: white;
+						overflow: hidden;
+
+						font-size: 0.7em;
+
+						text-decoration: none;
+
+						[data-farbe="Blau"] {
+							box-shadow: 0 1px 0px #45659c;
+							text-shadow: 0 -1px 0 #45659c;
+
+							background-color: #5981ae;
+						}
+
+						.titel {
+							
+							overflow: hidden;
+
+							
+							-webkit-transform: rotate(0deg);
+							position: relative;
+							left: 0px;
+
+						}
+
+						.raum, .zeit {
+							display: block;
+							position: absolute;
+							bottom: 4px;
+							right: 4px;
+							float: right;
+							width: 100%;
+
+							font-size: 0.7em;
+
+							text-align: right;
+						}
+
+						.raum {
+							bottom: 16px;
+						}
+
+						$details_width: 400px;
+
+						.details {
+							display: none;
+							position: absolute;
+							left: 105%;
+							top: 0px;
+							width: $details_width;
+							color: #333;
+							text-shadow: none;
+							background-color: white;
+							border: solid 1px #BBB;
+							border-radius: 10px;
+							padding: 10px;
+							z-index: 4;
+							box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+							.pfeil {
+								position: absolute;
+								left: -23px;
+								top: 10px;
+								font-size: 30px;
+								text-shadow: 2px 0 0 white, -1px 0 5px rgba(0,0,0,0.4);
+								color: white;
+							}
+						}
+
+						.details.links {
+							right: 105%;
+							left: auto;
+
+							.pfeil {
+								right: -24px;
+								-webkit-transform: rotate(180deg);
+							}
+						}
+
+						
+					}
+
+					.termin:hover {
+						background-color: #cf6561;
+						box-shadow: 0 1px 0px #c05a55;
+						text-shadow: 0 -1px 0 #c05a55;
+
+					}
+				}
+			}
+			.kopfzeile {
+				
+				box-shadow: inset 0 -1px 0px #FBFBFB;
+				height: 24px;
+
+				>div {
+					position: relative;
+					width: 14.28%;
+					float: left;
+
+					
+					top: 0px;
+					padding: 0 6px;
+					padding-top: 2px;
+					margin-top: 2px;
+					border-right: solid 1px #F6F6F6;
+					
+
+					.datum {
+						font-size: 1em;
+					}
+
+					.tag {
+
+						position: relative;
+						
+
+						font-size: 0.8em;
+
+						.lang {
+							display: inline-block;
+						}
+					}
+
+					
+				}
+
+				div:last-child {
+					border-right: none;
+				}
+			}
+
+			.tage {
+				max-height: 530px;
+				width: 100%;
+				margin-top: 0px!important;
+				overflow-y: scroll;
+				border-top: solid 1px #EEE;
+
+				>.tag {
+					position: relative;
+					width: 14.28%;
+					float: left;
+
+					background: -webkit-linear-gradient(top, #f0f0f0 0%, #fff 2%) 0 8px;
+					background-size: 100% 60px;
+					background-position: 0 -1px;
+
+					border-right: solid 1px #EEE;
+
+					.termin {
+						
+						position: absolute;
+						width: 90%;
+						padding: 4px;
+						z-index: 2;
+						border-radius: 5px;
+						
+						color: white;
+						overflow: hidden;
+
+						font-size: 0.7em;
+
+						text-decoration: none;
+
+						box-shadow: 0 1px 0px #45659c, inset 0 0 2px #25457c;
+						text-shadow: 0 -1px 0 #45659c;
+						background-color: #5981ae;
+
+						transition: all 0.15s ease-in-out;
+						-webkit-transition: all 0.15s ease-in-out;
+
+						.titel {
+							
+							overflow: hidden;
+
+							
+							-webkit-transform: rotate(0deg);
+							position: relative;
+							left: 0px;
+							
+
+
+						}
+
+						.raum, .zeit {
+							display: block;
+							
+
+							font-size: 0.8em;
+
+							
+						}
+
+						$details_width: 400px;
+
+						.details {
+							display: none;
+							position: absolute;
+							left: 105%;
+							top: 0px;
+							width: $details_width;
+							color: #333;
+							text-shadow: none;
+							background-color: white;
+							border: solid 1px #BBB;
+							border-radius: 10px;
+							padding: 10px;
+							z-index: 4;
+							box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+							.pfeil {
+								position: absolute;
+								left: -23px;
+								top: 10px;
+								font-size: 30px;
+								text-shadow: 2px 0 0 white, -1px 0 5px rgba(0,0,0,0.4);
+								color: white;
+							}
+						}
+
+						.details.links {
+							right: 105%;
+							left: auto;
+
+							.pfeil {
+								right: -24px;
+								-webkit-transform: rotate(180deg);
+							}
+						}
+
+						
+					}
+
+					.termin:hover, .termin:focus {
+						z-index: 5!important;
+
+						width: 90%!important;
+						left: 5%!important;
+
+						.titel, .raum, .zeit {
+								zoom: 1;
+								filter: alpha(opacity=100);
+								opacity: 1;
+							}
+					}
+
+					@for $i from 2 through 9 {
+						[data-spalten-gesamt="#{$i}"]{
+							.titel, .raum, .zeit {
+								zoom: 1;
+								filter: alpha(opacity=0);
+								opacity: 0.0;
+							}
+						}
+					}
+						
+
+					[data-farbe="Blau"] {
+						box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+						text-shadow: 0 -1px 0 #45659c;
+						background-color: #5981ae;
+					}
+
+					[data-farbe="Blau"]:hover {
+						background-color: darken(#5981ae, 5%);
+					}
+
+					[data-farbe="Rot"] {
+						background-color: #cf6561;
+						box-shadow: 0 1px 0px #c05a55, inset 0 0 2px darken(#cf6561, 30%);
+						text-shadow: 0 -1px 0 #c05a55;
+					}
+
+					[data-farbe="Rot"]:hover {
+						background-color: darken(#cf6561, 5%);
+					}
+
+					[data-farbe="Gruen"] {
+						background-color: rgb(72, 168, 107);
+						box-shadow: 0 1px 0px darken(rgb(72, 168, 107), 10%), inset 0 0 2px darken(rgb(72, 168, 107), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(72, 168, 107), 10%);
+					}
+
+					[data-farbe="Gruen"]:hover {
+						background-color: darken(rgb(72, 168, 107), 5%);
+					}
+
+					[data-farbe="Orange"] {
+						background-color: rgb(226, 172, 103);
+						box-shadow: 0 1px 0px darken(rgb(226, 172, 103), 10%), inset 0 0 2px darken(rgb(226, 172, 103), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(226, 172, 103), 10%);
+					}
+
+					[data-farbe="Orange"]:hover {
+						background-color: darken(rgb(226, 172, 103), 5%);
+					}
+
+					[data-farbe="Tuerkis"] {
+						background-color: rgb(126, 219, 236);
+						box-shadow: 0 1px 0px darken(rgb(126, 219, 236), 20%), inset 0 0 2px darken(rgb(126, 219, 236), 30%);
+						text-shadow: 0 -1px 0 darken(rgb(126, 219, 236), 20%);
+					}
+
+					[data-farbe="Tuerkis"]:hover {
+						background-color: darken(rgb(126, 219, 236), 5%);
+					}
+					
+				}
+
+				>div:last-child {
+					border-right: none;
+				}
+
+				>div:hover, >div.wochenende {
+					background: -webkit-linear-gradient(top, #f0f0f0 0%, #fcfcfc 2%) 0 8px;
+					background-size: 100% 60px;
+					background-position: 0 -1px;
+				}
+
+				>div.heute {
+					background: -webkit-linear-gradient(top, #f0f0f0 0%, #fdfad3 2%) 0 8px;
+					background-size: 100% 60px;
+					background-position: 0 -1px;
+				}
+
+				.zeitleiste {
+					position: absolute;
+					left: 0px;
+					right: 0px;
+					height: 1px;
+					background-color: #383838;
+				}
+			}
+		}
+
+		.monatsansicht {
+			position: relative;
+
+			.kopfzeile {
+				height: 28px;
+				border-bottom: solid 1px #EEE;
+				box-shadow: inset 0 -1px 0px #FBFBFB;
+				
+				>div {
+					position: relative;
+					width: 14.28%;
+					float: left;
+
+					height: 26px;
+					top: 0px;
+					padding: 0 6px;
+					padding-top: 2px;
+					margin-top: 2px;
+					border-right: solid 1px #F6F6F6;
+
+					.tag {
+						display: block;
+						text-align: center;
+						position: relative;
+						font-size: 1em;
+
+						.lang {
+							display: inline-block;
+						}
+					}
+				}
+
+				>div:last-child {
+					border-right: none;
+				}
+			}
+
+
+			.woche {
+				position: relative;
+				height: 100px;
+				border-bottom: solid 1px #ddd;
+
+				>div {
+					display: inline-block;
+					float: left;
+					width: 14.285%;
+					height: 100%;
+					border-right: solid 1px #eee;
+					padding: 5px;
+
+					.datum {
+						display: block;
+						margin-top: 12px;
+						text-align: center;
+						font-size: 1.4em;
+						color: #777;
+					}
+
+					.termine {
+						width: 100%;
+						text-align: center;
+						margin-top: 8px;
+						margin-left: 4px;
+
+						.center {
+							display:inline-block;
+						    *display:inline;/* IE*/
+						    *zoom:1;/* IE*/
+						    
+						    text-align:left;
+
+						    .termin {
+						    	float:left;
+								margin: 1px;
+								width: 15px;
+								height: 15px;
+								border-radius: 100%;
+								box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+								text-shadow: 0 -1px 0 #45659c;
+								background-color: #5981ae;
+								
+
+								div, span {
+									display: none;
+								}
+							}
+
+							[data-farbe="Blau"] {
+								box-shadow: 0 1px 0px #45659c, inset 0 0 2px #45659c;
+								text-shadow: 0 -1px 0 #45659c;
+								background-color: #5981ae;
+							}
+
+							[data-farbe="Blau"]:hover {
+								background-color: darken(#5981ae, 5%);
+							}
+
+							[data-farbe="Rot"] {
+								background-color: #cf6561;
+								box-shadow: 0 1px 0px #c05a55, inset 0 0 2px darken(#cf6561, 30%);
+								text-shadow: 0 -1px 0 #c05a55;
+							}
+
+							[data-farbe="Rot"]:hover {
+								background-color: darken(#cf6561, 5%);
+							}
+
+							[data-farbe="Gruen"] {
+								background-color: rgb(72, 168, 107);
+								box-shadow: 0 1px 0px darken(rgb(72, 168, 107), 10%), inset 0 0 2px darken(rgb(72, 168, 107), 30%);
+								text-shadow: 0 -1px 0 darken(rgb(72, 168, 107), 10%);
+							}
+
+							[data-farbe="Gruen"]:hover {
+								background-color: darken(rgb(72, 168, 107), 5%);
+							}
+
+							[data-farbe="Orange"] {
+								background-color: rgb(226, 172, 103);
+								box-shadow: 0 1px 0px darken(rgb(226, 172, 103), 10%), inset 0 0 2px darken(rgb(226, 172, 103), 30%);
+								text-shadow: 0 -1px 0 darken(rgb(226, 172, 103), 10%);
+							}
+
+							[data-farbe="Orange"]:hover {
+								background-color: darken(rgb(226, 172, 103), 5%);
+							}
+
+							[data-farbe="Tuerkis"] {
+								background-color: rgb(126, 219, 236);
+								box-shadow: 0 1px 0px darken(rgb(126, 219, 236), 20%), inset 0 0 2px darken(rgb(126, 219, 236), 30%);
+								text-shadow: 0 -1px 0 darken(rgb(126, 219, 236), 20%);
+							}
+
+							[data-farbe="Tuerkis"]:hover {
+								background-color: darken(rgb(126, 219, 236), 5%);
+							}
+						}
+
+						
+					}
+					
+				}
+
+				>div.heute {
+					background-color: #fdfad3;
+				}
+
+				.nicht-aktuell {
+					background-color: #fafafa;
+				}
+
+				>div:last-child {
+					border-right: none;
+				}
+			}
+		}
+	}
+}
+
+@include max-screen(1970) {
+	// Kurze Tagesnamen verwenden
+	.kalender .tag .lang {
+		display: none!important;
+	}	
+}
+
+@include max-screen(1400) {
+	// Sonntag ausblenden
+	.kalender .wochenansicht .sonntag, .kalender .monatsansicht .sonntag {
+		display: none!important;
+	}
+
+	.kalender {
+		.wochenansicht, .monatsansicht {
+			.tage .tag {
+				width: (100%/6)!important;	
+			}
+
+			.kopfzeile, .woche {
+				>div {
+					width: (100%/6)!important;
+				}
+			}
+
+			.kopfzeile {
+				.datum {
+					font-size: 0.8em!important;
+				}
+
+				.tag {
+					font-size: 0.7em!important;
+				}
+
+				>div {
+					padding-left: 3px;
+					padding-right: 3px;
+				}
+			}
+		}
+	}
+}
+
+@include min-screen(1020) {
+	.kalender .menue .intervall .buttons {
+		display: inline-block!important;
+	}
+}
+
+@include max-screen(1020)  {
+	// Kleine Navbar verwenden
+	.kalender .menue {
+		.intervall {
+			.buttons {
+				display: none;
+				position: absolute;
+				right: -5px;
+				top: 30px;
+
+				background-color: white;
+				background-image: none;
+
+				box-shadow: 0 0 3px rgba(0,0,0,0.3);
+
+				z-index: 10;
+
+				.pfeil {
+					display: inline-block;
+					position: absolute;
+					top: -15px;
+
+					right: 8px;
+					color: white;
+
+					text-shadow: -2px 0px 3px rgba(0,0,0,0.3);
+
+					-webkit-transform: rotate(90deg);
+
+
+				}
+
+				a {
+					padding: 10px;
+				}
+			}
+
+			.aktion {
+				display: inline-block;
+			}
+		}
+
+		.titel {
+			margin-right: 30px;
+		}
+		
+	}
+
+
+}
+
+
+@include max-screen(1020) {
+	// Wochenende ausblenden
+	.kalender .wochenansicht .wochenende {
+		display: none;
+	}
+
+	.kalender .wochenansicht {
+		.tage, .kopfzeile {
+			>div {
+				width: (100%/5)!important;
+			}
+		}
+	}
+}
+

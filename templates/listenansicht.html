@@ -1,0 +1,73 @@
+<div class="kalender gross">
+	<div class="menue">
+
+		<span class="titel"></span>
+
+		<span class="intervall">
+			<a class="aktion" href="#">&#9776;</a>
+			<div class="buttons">
+				<span class="pfeil">&#9664;</span>
+				<a href="{{dateiname}}?tag_{{datum_aktuell}}" class="tag">Tag</a>
+				<a href="{{dateiname}}?woche_{{datum_aktuell}}" class="woche">Woche</a>
+				<a href="{{dateiname}}?monat_{{datum_aktuell}}" class="monat">Monat</a>
+				<span class="liste aktiv">Liste</span>
+			</div>
+		</span>
+
+	</div>
+
+	<div class="inhalt">
+		<div class="listenansicht">
+			
+			<div class="termine">
+				{{#termine}}	
+					<div class="termin">
+						<span class="titel">{{ summary }}</span>
+						<dl class="liste">
+							{{#location}}
+								<dt>Raum:</dt>
+								<dd>{{location}}</dd>
+							{{/location}}
+							{{#ganztagig}}
+								<dt>Zeit:</dt>
+								<dd>{{#datum}}{{datum}}{{/datum}}</dd>
+							{{/ganztagig}}
+							{{#nicht_ganztagig}}
+								{{#time}}
+									<dt>Zeit:</dt>
+									<dd>{{#datum}}{{datum}}, {{/datum}}{{ time }} Uhr</dd>
+								{{/time}}
+							{{/nicht_ganztagig}}
+							<!-- <span class="raum">Raum: {{ location }}</span>
+							<span class="zeit">Zeit: {{datum}}, {{ time }}</span> -->
+						</dl>
+						{{#description_vorschau}}
+							<div class="details">
+								<span class="vorschau">{{ description_vorschau }} 
+									{{#description_komplett }}
+									<a class="weiter-lesen" href="javascript:void(0);">Weiter lesen</a>
+									{{/description_komplett }}
+								</span>
+								{{#description_komplett }}
+									<span class="komplett">{{{ description_komplett }}}</span>
+								{{/description_komplett }}
+							</div>
+						{{/description_vorschau}}
+					</div>
+				{{/termine}}
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+      (function() {
+        $().ready(function() {
+        	$(".weiter-lesen").click(function(e){
+	            e.preventDefault();
+	            $(this).parent().hide().parent().find(".komplett").show();
+	        });
+      	});
+      })();
+</script>
