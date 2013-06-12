@@ -1,7 +1,7 @@
 Univis Plugin - ReadMe
 
 
-* Beim Default-Fall sollten alle Dateien im Verzeichnis /vkdaten/tools/univis/ unter dem Document-Root
+* Beim Default-Fall sollten alle Dateien im Verzeichnis /vkdaten/tools/kalender/ unter dem Document-Root
   des Webauftritts abgelegt sein.
 
 Entwickler und Projektbeteiligte
