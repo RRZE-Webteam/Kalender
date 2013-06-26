@@ -36,18 +36,24 @@
 		// Rendert das Template mit den uebergebenen Daten.
 		// Falls noetig werden die Daten noch formatiert.
 		public function rendere_daten($daten = '') {
-			$tag = $daten[2]["datum"];
-			$ts = strtotime($tag);
+			$tag = $daten[2];
+			$ts = strtotime($tag["datum"]);
 			$monat = $this->monate[date("n", $ts) -1];
 			$tage = $this->markiere_termine($daten);
 
-			
+			$stunden = array();
+			$stunde_start = date("G", strtotime($tag["tag_anfang"]));
+			for ($i=0; $i < $tag["tag_laenge"]/60; $i++) { 
+				$stunden[] = array("stunde" => $stunde_start + $i, "stunde_abstand" => $i*60);	
+			}
+
 			$ansicht_daten = array(
 				"monat" => $monat,
-				"datum_aktuell" => $this->datum_aktuell($tag),
-				"datum_vor" => $this->datum_vor($tag),
-				"datum_zurueck" => $this->datum_zurueck($tag),
-				"tage" => $tage
+				"datum_aktuell" => $this->datum_aktuell($tag["datum"]),
+				"datum_vor" => $this->datum_vor($tag["datum"]),
+				"datum_zurueck" => $this->datum_zurueck($tag["datum"]),
+				"tage" => $tage,
+				"stunden" =>$stunden
 			);
 			return $this->rendere_template($ansicht_daten);
 		}

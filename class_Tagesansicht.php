@@ -22,13 +22,22 @@
 		// Falls noetig werden die Daten noch formatiert.
 		public function rendere_daten($daten = '') {
 			$datum_aktuell = $daten[0]["datum"];
+			$tag = $daten[0];
+
+			$stunden = array();
+			$stunde_start = date("G", strtotime($tag["tag_anfang"]));
+			for ($i=0; $i < $tag["tag_laenge"]/60; $i++) { 
+				$stunden[] = array("stunde" => $stunde_start + $i, "stunde_abstand" => $i*60);	
+			}
+
 			$tag = $this->markiere_termine($daten);
 
 			$ansicht_daten = array(
 				"datum_aktuell" => $this->datum_aktuell($datum_aktuell),
 				"datum_vor" => $this->datum_vor($datum_aktuell),
 				"datum_zurueck" => $this->datum_zurueck($datum_aktuell),
-				"tag" => $tag
+				"tag" => $tag,
+				"stunden" => $stunden
 			);
 			return $this->rendere_template($ansicht_daten);
 		}

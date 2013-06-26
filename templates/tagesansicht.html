@@ -32,6 +32,11 @@
 			</div>
 			
 			<div class="tag-container">
+        <div class="stunden">
+          {{#stunden}}
+            <div class="stunde"><span class="icon-uhr">&#9719;</span> {{stunde}}</div>
+          {{/stunden}}
+        </div>
 				<div class="tag" style="height: {{tag_laenge}}px;" data-anfang="{{tag_anfang}}">
 					{{#termine}}	
 						<a href="javascript:void(0);" class="termin clearfix" style="height: {{duration}}px; top: {{start}}px; left: {{left}}%; width: {{width}}%;" data-start="{{ start }}" data-dauer="{{ duration }}" data-ende="{{ ende }}" data-farbe="{{farbe}}" data-spalten-gesamt="{{spalten_gesamt}}" data-spalte="{{ spalte }}" >
@@ -69,7 +74,7 @@
 				</div>
 			</div>
 
-			<div class="zeitleiste hint--left hint--always" data-hint="00:00"> </div>
+			<!-- <div class="zeitleiste hint--left hint--always" data-hint="00:00"> </div> -->
 
 			<div class="popup">
 				<a href="#" class="schliessen">&#8855;</a>
@@ -151,38 +156,38 @@
 
           // Zeitleiste
 
-          var zeitleiste = $(".zeitleiste").hide(),
-              tag = $(".tag"),
-              timer = null;
+          // var zeitleiste = $(".zeitleiste").hide(),
+          //     tag = $(".tag"),
+          //     timer = null;
 
-          $(".tage .tag, .tagesansicht").mousemove(function(e) {
-            var tages_anfang,
-                offset,
-                stunden,
-                minuten,
-                tag_scrolltotop = $(".tag-container").scrollTop();
+          // $(".tage .tag, .tagesansicht").mousemove(function(e) {
+          //   var tages_anfang,
+          //       offset,
+          //       stunden,
+          //       minuten,
+          //       tag_scrolltotop = $(".tag-container").scrollTop();
 
-            window.clearTimeout(timer);
-            zeitleiste.fadeIn();
+          //   window.clearTimeout(timer);
+          //   zeitleiste.fadeIn();
 
-            offset = e.pageY - tag.offset().top - 35;
-            if(offset>=25) {
-            	zeitleiste.css("top", offset);
+          //   offset = e.pageY - tag.offset().top - 35;
+          //   if(offset>=25) {
+          //   	zeitleiste.css("top", offset);
             
-            tages_anfang = $(".tage .tag, .tagesansicht div.tag").data("anfang").split(":");
-            stunden = Math.floor((offset - 25 + tag_scrolltotop) / 60) + tages_anfang[0] * 1;
-            minuten = Math.floor((offset - 25 + tag_scrolltotop) - Math.floor((offset - 25 + tag_scrolltotop) / 60)*60) + tages_anfang[1] * 1;
+          //   tages_anfang = $(".tage .tag, .tagesansicht div.tag").data("anfang").split(":");
+          //   stunden = Math.floor((offset - 25 + tag_scrolltotop) / 60) + tages_anfang[0] * 1;
+          //   minuten = Math.floor((offset - 25 + tag_scrolltotop) - Math.floor((offset - 25 + tag_scrolltotop) / 60)*60) + tages_anfang[1] * 1;
 
-            stunden = (stunden<10 ? "0" : "") + stunden;
-            minuten = (minuten<10 ? "0" : "") + minuten;
-            zeitleiste.attr("data-hint", stunden+":"+minuten);
+          //   stunden = (stunden<10 ? "0" : "") + stunden;
+          //   minuten = (minuten<10 ? "0" : "") + minuten;
+          //   zeitleiste.attr("data-hint", stunden+":"+minuten);
             
-            timer = window.setTimeout(function() {
-                zeitleiste.fadeOut();
-              }, 2000);
-            }
+          //   timer = window.setTimeout(function() {
+          //       zeitleiste.fadeOut();
+          //     }, 2000);
+          //   }
 	        
-          });
+          // });
 
         });
       })();
