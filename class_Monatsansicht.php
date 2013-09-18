@@ -15,7 +15,7 @@
 
 		// Funktion soll fuer Tagesansicht und Datum die anzuzeigenden Tage als Array zurueckgeben.
 		public function lade_tage($datum = '') {
-			// Datum kann ein Tag inm aktuellen Monat sein.
+			// Datum kann ein Tag im aktuellen Monat sein.
 			if(!$datum || $datum === '') {
 				$datum = date("Ymd");
 			}
@@ -26,12 +26,19 @@
 			$jahr = date('o', $ts);
 			$monat = date('m', $ts);
 
+
 			$erster_im_monat = strtotime($jahr."-".$monat."-1");
 			$letzter_im_monat = strtotime($jahr."-".$monat."-". cal_days_in_month(CAL_GREGORIAN, $monat, $jahr));
 
 			$erste_woche_im_monat = date("W", $erster_im_monat);
 			$letzte_woche_im_monat = date("W", $letzter_im_monat);
-			
+
+			$zeige_erste_woche_im_jahr = false;
+			if($letzte_woche_im_monat == "01") {
+				$letzte_woche_im_monat = "52";
+				$zeige_erste_woche_im_jahr = true;
+			}
+
 			$tage_in_monat = array();
 
 			for ($woche = $erste_woche_im_monat; $woche <= $letzte_woche_im_monat; $woche++) { 
@@ -44,6 +51,15 @@
 				    $tag = date("Y-m-d", $ts);
 				    array_push($tage_in_monat, $tag);
 				}	
+			}
+
+			if($zeige_erste_woche_im_jahr) {
+				for($i = 1; $i <= 7; $i++) {
+				 	
+				    $ts = strtotime(($jahr+1).'W01'.$i);
+				    $tag = date("Y-m-d", $ts);
+				    array_push($tage_in_monat, $tag);
+				}
 			}
 			
 			return $tage_in_monat;

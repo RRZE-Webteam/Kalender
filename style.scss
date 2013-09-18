@@ -583,7 +583,7 @@ body {
 
 				>div {
 					position: relative;
-					width: (90%/5);
+					width: (90%/7);
 					float: left;
 
 					
@@ -616,10 +616,6 @@ body {
 				div:first-child {
 					margin-left: 10%;
 				}
-
-				.wochenende {
-					display: none;
-				}
 			}
 
 			.tage {
@@ -629,13 +625,9 @@ body {
 				overflow-y: scroll;
 				border-top: solid 1px #EEE;
 
-				.wochenende {
-					display: none;
-				}
-
 				>.tag {
 					position: relative;
-					width: (90%/5);
+					width: (90%/7);
 					float: left;
 
 					background: -webkit-linear-gradient(top, #f0f0f0 0%, #fff 2%) 0 8px;
@@ -1021,41 +1013,41 @@ body {
 	}	
 }
 
-@include max-screen(1400) {
-	// Wochende ausblenden
-	.kalender .wochenansicht .wochenende {
-		display: none!important;
-	}
+// @include max-screen(1400) {
+// 	// Wochende ausblenden
+// 	.kalender .wochenansicht .wochenende {
+// 		display: none!important;
+// 	}
 
-	.kalender {
-		.wochenansicht {
-			.tage .tag {
-				width: (900%/50)!important;	
-			}
+// 	.kalender {
+// 		.wochenansicht {
+// 			.tage .tag {
+// 				width: (900%/50)!important;	
+// 			}
 
-			.kopfzeile, .woche {
-				>div {
-					width: (900%/50)!important;
-				}
-			}
+// 			.kopfzeile, .woche {
+// 				>div {
+// 					width: (900%/50)!important;
+// 				}
+// 			}
 
-			.kopfzeile {
-				.datum {
-					font-size: 0.8em!important;
-				}
+// 			.kopfzeile {
+// 				.datum {
+// 					font-size: 0.8em!important;
+// 				}
 
-				.tag {
-					font-size: 0.7em!important;
-				}
+// 				.tag {
+// 					font-size: 0.7em!important;
+// 				}
 
-				>div {
-					padding-left: 3px;
-					padding-right: 3px;
-				}
-			}
-		}
-	}
-}
+// 				>div {
+// 					padding-left: 3px;
+// 					padding-right: 3px;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
 
 @include min-screen(1020) {
 	.kalender .menue .intervall .buttons {

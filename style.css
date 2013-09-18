@@ -193,14 +193,14 @@ body {
         margin-top: 2px;
         margin-left: 10%; }
       .kalender .inhalt .tagesansicht .kopfzeile .tag .lang {
-        display: inline!important; }
+        display: inline !important; }
     .kalender .inhalt .tagesansicht .tag-container {
       max-height: 530px;
       overflow-y: scroll; }
       .kalender .inhalt .tagesansicht .tag-container .tag {
         position: relative;
         width: 90%;
-        margin-top: 0px!important;
+        margin-top: 0px !important;
         overflow-y: scroll;
 		background: #f0f0f0; /* Old browsers */
 		background: -moz-linear-gradient(top,  #f0f0f0 0%, #ffffff 2%); /* FF3.6+ */
@@ -239,7 +239,7 @@ body {
             display: block;
             font-size: 0.8em; }
         .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus {
-          z-index: 5!important;
+          z-index: 5 !important;
           font-weight: 100 !important; }
           .kalender .inhalt .tagesansicht .tag-container .tag .termin:hover .titel, .kalender .inhalt .tagesansicht .tag-container .tag .termin:focus .titel {
             display: inline-block; }
@@ -410,7 +410,7 @@ body {
       height: 24px; }
       .kalender .inhalt .wochenansicht .kopfzeile > div {
         position: relative;
-        width: 18%;
+        width: 12.85714%;
         float: left;
         top: 0px;
         padding: 0 6px;
@@ -426,19 +426,15 @@ body {
             display: inline-block; }
       .kalender .inhalt .wochenansicht .kopfzeile div:first-child {
         margin-left: 10%; }
-      .kalender .inhalt .wochenansicht .kopfzeile .wochenende {
-        display: none; }
     .kalender .inhalt .wochenansicht .tage {
       max-height: 530px;
       width: 100%;
-      margin-top: 0px!important;
+      margin-top: 0px !important;
       overflow-y: scroll;
       border-top: solid 1px #eeeeee; }
-      .kalender .inhalt .wochenansicht .tage .wochenende {
-        display: none; }
       .kalender .inhalt .wochenansicht .tage > .tag {
         position: relative;
-        width: 18%;
+        width: 12.85714%;
         float: left;
 		background: #f0f0f0; /* Old browsers */
 		background: -moz-linear-gradient(top,  #f0f0f0 0%, #ffffff 2%); /* FF3.6+ */
@@ -502,9 +498,9 @@ body {
               right: -24px;
               -webkit-transform: rotate(180deg); }
         .kalender .inhalt .wochenansicht .tage > .tag .termin:hover, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus {
-          z-index: 5!important;
-          width: 90%!important;
-          left: 5%!important; }
+          z-index: 5 !important;
+          width: 90% !important;
+          left: 5% !important; }
           .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .titel, .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .raum, .kalender .inhalt .wochenansicht .tage > .tag .termin:hover .zeit, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .titel, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .raum, .kalender .inhalt .wochenansicht .tage > .tag .termin:focus .zeit {
             zoom: 1;
             filter: alpha(opacity=100);
@@ -720,25 +716,10 @@ body {
 
 @media screen and (max-width: 1970px) {
   .kalender .tag .lang {
-    display: none!important; } }
-@media screen and (max-width: 1400px) {
-  .kalender .wochenansicht .wochenende {
-    display: none!important; }
-
-  .kalender .wochenansicht .tage .tag {
-    width: 18% !important; }
-  .kalender .wochenansicht .kopfzeile > div, .kalender .wochenansicht .woche > div {
-    width: 18% !important; }
-  .kalender .wochenansicht .kopfzeile .datum {
-    font-size: 0.8em!important; }
-  .kalender .wochenansicht .kopfzeile .tag {
-    font-size: 0.7em!important; }
-  .kalender .wochenansicht .kopfzeile > div {
-    padding-left: 3px;
-    padding-right: 3px; } }
+    display: none !important; } }
 @media screen and (min-width: 1020px) {
   .kalender .menue .intervall .buttons {
-    display: inline-block!important; } }
+    display: inline-block !important; } }
 @media screen and (max-width: 1020px) {
   .kalender .menue .intervall .buttons {
     display: none;
@@ -765,6 +746,6 @@ body {
     margin-right: 30px; }
 
   .tagesansicht .stunde, .wochenansicht .stunde {
-    margin-right: 5px!important; }
+    margin-right: 5px !important; }
     .tagesansicht .stunde span, .wochenansicht .stunde span {
       display: none; } }
