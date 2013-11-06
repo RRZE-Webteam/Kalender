@@ -92,7 +92,8 @@
 						$event_data["description_vorschau"] = strip_tags(htmlspecialchars_decode($description[0]));
 					}else{
 						$event_data["description_vorschau"] = strip_tags(htmlspecialchars_decode($description[0])) . "...";
-						$event_data["description_komplett"] = htmlspecialchars_decode(implode('', $description));
+						$description_html = htmlspecialchars_decode(str_replace("\n", "<br />", implode("", $description)));
+						$event_data["description_komplett"] = $description_html;
 					}
 				}
 
