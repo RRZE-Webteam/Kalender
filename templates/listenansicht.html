@@ -22,34 +22,36 @@
 			<div class="termine">
 				{{#termine}}	
 					<div class="termin">
-						<span class="titel">{{ summary }}</span>
-						<dl class="liste">
-							{{#location}}
-								<dt>Raum:</dt>
-								<dd>{{location}}</dd>
+						<h3 class="titel">{{ summary }}</h3>
+						<table>
+							{{#location}}	
+							<tr>
+								<th>Ort:</th>
+								<td>{{location}}</td>
+							</tr>
 							{{/location}}
 							{{#ganztagig}}
-								<dt>Zeit:</dt>
-								<dd>{{#datum}}{{datum}}{{/datum}}</dd>
+								<tr>
+                                                                <th>
+								Zeit:</th>
+								<td>{{#datum}}{{datum}}{{/datum}}</td>
+								</tr>
 							{{/ganztagig}}
 							{{#nicht_ganztagig}}
 								{{#time}}
-									<dt>Zeit:</dt>
-									<dd>{{#datum}}{{datum}}, {{/datum}}{{ time }} Uhr</dd>
+									<tr>
+									<th>Zeit:</th>
+									<td>{{#datum}}{{datum}}, {{/datum}}{{ time }} Uhr</td>
+									</tr>
 								{{/time}}
 							{{/nicht_ganztagig}}
 							<!-- <span class="raum">Raum: {{ location }}</span>
 							<span class="zeit">Zeit: {{datum}}, {{ time }}</span> -->
-						</dl>
+						</table>
 						{{#description_vorschau}}
 							<div class="details">
-								<span class="vorschau">{{ description_vorschau }} 
-									{{#description_komplett }}
-									<a class="weiter-lesen" href="javascript:void(0);">Weiter lesen</a>
-									{{/description_komplett }}
-								</span>
 								{{#description_komplett }}
-									<span class="komplett">{{{ description_komplett }}}</span>
+									{{{ description_komplett }}}
 								{{/description_komplett }}
 							</div>
 						{{/description_vorschau}}
